@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Student Registration</h2>
+
+    <form action="process.php" method="POST"
+          onsubmit="return validateForm()">
+
+        <input type="text" id="fullname" name="fullname"
+               placeholder="Full Name" required>
+
+        <input type="text" id="admission" name="admission"
+               placeholder="Admission Number" required>
+
+        <select id="course" name="course" required>
+            <option value="">Select Course</option>
+            <option value="ICT">ICT</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Business IT">Business IT</option>
+            <option value="Cyber Security">Cyber Security</option>
+        </select>
+
+        <input type="tel" id="phone" name="phone"
+               placeholder="Phone Number" required>
+
+        <button type="submit">Register Student</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let fullname = document.getElementById("fullname").value.trim();
+    let admission = document.getElementById("admission").value.trim();
+    let course = document.getElementById("course").value;
+    let phone = document.getElementById("phone").value.trim();
+
+    if (fullname === "" || admission === "" ||
+        course === "" || phone === "") {
+        alert("Please fill in all fields.");
+        return false;
+    }
+
+    if (!/^[A-Za-z\s'-]+$/.test(fullname)) {
+        alert("Please enter a valid full name.");
+        return false;
+    }
+
+    if (!/^[A-Za-z0-9/-]+$/.test(admission)) {
+        alert("Enter a valid admission number.");
+        return false;
+    }
+
+    if (!/^\+?[0-9]{10,13}$/.test(phone)) {
+        alert("Enter a valid phone number (10-13 digits).");
+        return false;
+    }
+
+    alert("Form validated successfully!");
+    return true;
+}
+</script>
+</body>
+</html>
